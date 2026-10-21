@@ -5,14 +5,14 @@ from .options import option_groups, option_presets
 
 
 # For our game to display correctly on the website, we need to define a WebWorld subclass.
-class APQuestWebWorld(WebWorld):
+class HotelpelagoWebWorld(WebWorld):
     # We need to override the "game" field of the WebWorld superclass.
     # This must be the same string as the regular World class.
-    game = "APQuest"
+    game = "Hotelpelago"
 
     # Your game pages will have a visual theme (affecting e.g. the background image).
     # You can choose between dirt, grass, grassFlowers, ice, jungle, ocean, partyTime, and stone.
-    theme = "grassFlowers"
+    theme = "grass"
 
     # A WebWorld can have any number of tutorials, but should always have at least an English setup guide.
     # Many WebWorlds just have one setup guide, but some have multiple, e.g. for different languages.

@@ -8,12 +8,12 @@ from rule_builder.rules import Has, HasAll, Rule
 from .options import HardMode
 
 if TYPE_CHECKING:
-    from .world import APQuestWorld
+    from .world import HotelpelagoWorld
 
 HAS_KEY = Has("Key")  # Hmm, what could this be? A little foreshadowing perhaps? :) You'll find out if you keep reading!
 
 
-def set_all_rules(world: APQuestWorld) -> None:
+def set_all_rules(world: HotelpelagoWorld) -> None:
     # In order for AP to generate an item layout that is actually possible for the player to complete,
     # we need to define rules for our Entrances and Locations.
     # Note: Regions do not have rules, the Entrances connecting them do!
@@ -24,7 +24,7 @@ def set_all_rules(world: APQuestWorld) -> None:
     set_completion_condition(world)
 
 
-def set_all_entrance_rules(world: APQuestWorld) -> None:
+def set_all_entrance_rules(world: HotelpelagoWorld) -> None:
     # First, we need to actually grab our entrances. Luckily, there is a helper method for this.
     overworld_to_bottom_right_room = world.get_entrance("Overworld to Bottom Right Room")
     overworld_to_top_left_room = world.get_entrance("Overworld to Top Left Room")
@@ -72,7 +72,7 @@ def set_all_entrance_rules(world: APQuestWorld) -> None:
     # you can make custom rules by subclassing CustomRule.
 
 
-def set_all_location_rules(world: APQuestWorld) -> None:
+def set_all_location_rules(world: HotelpelagoWorld) -> None:
     # Location rules work no differently from Entrance rules.
     # Most of our locations are chests that can simply be opened by walking up to them.
     # Thus, their logical requirements are covered by the Entrance rules of the Entrances that were required to
@@ -131,7 +131,7 @@ def set_all_location_rules(world: APQuestWorld) -> None:
     world.set_rule(final_boss, can_defeat_final_boss)
 
 
-def set_completion_condition(world: APQuestWorld) -> None:
+def set_completion_condition(world: HotelpelagoWorld) -> None:
     # Finally, we need to set a completion condition for our world, defining what the player needs to win the game.
     # For this, we can use world.set_completion_rule.
     # You can just set a completion condition directly like any other condition, referencing items the player receives:
@@ -146,7 +146,7 @@ def set_completion_condition(world: APQuestWorld) -> None:
 # If your world exclusively uses Rule Builder rules (like APQuest), it's worth trying CachedRuleBuilderWorld.
 # CachedRuleBuilderWorld is a subclass of World that has a bunch of caching magic to make rules faster.
 # Just have your world class subclass CachedRuleBuilderWorld instead of World:
-#   class APQuestWorld(CachedRuleBuilderWorld): ...
+#   class HotelpelagoWorld(CachedRuleBuilderWorld): ...
 # This may speed up your world, or it may make it slower.
 # The exact factors are complex and not well understood, but there is no harm in trying it.
 # Generate a few seeds and see if there is a noticeable difference!
