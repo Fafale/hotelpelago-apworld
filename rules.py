@@ -19,7 +19,7 @@ CAN_ACCESS_ROOM_1 = CAN_ACCESS_HALLWAYS & Has("Room 1 Key")
 CAN_ACCESS_ROOM_2 = CAN_ACCESS_HALLWAYS & Has("Room 2 Key")
 CAN_ACCESS_ROOM_3 = CAN_ACCESS_HALLWAYS & Has("Room 3 Key")
 
-CAN_CLEAN_FLOOR = Has("Mop & Bucket") & CAN_ACCESS_DINING_ROOM
+CAN_CLEAN_FLOOR = Has("Mop & Bucket") & CAN_ACCESS_STOREROOM
 
 
 def set_all_rules(world: HotelpelagoWorld) -> None:
