@@ -4,6 +4,8 @@ from typing import TYPE_CHECKING
 
 from BaseClasses import Entrance, Region
 
+from .data import REGION_LIST, REGION_CONNECTIONS
+
 if TYPE_CHECKING:
     from .world import HotelpelagoWorld
 
@@ -24,18 +26,10 @@ def create_and_connect_regions(world: HotelpelagoWorld) -> None:
 
 def create_all_regions(world: HotelpelagoWorld) -> None:
     # Creating a region is as simple as calling the constructor of the Region class.
-    lobby       = Region("Lobby", world.player, world.multiworld)
-    storeroom   = Region("Storeroom", world.player, world.multiworld)
-    dining_room = Region("Dining Room", world.player, world.multiworld)
-    kitchen     = Region("Kitchen", world.player, world.multiworld)
-    laundry     = Region("Laundry", world.player, world.multiworld)
-    hallways    = Region("Hallways", world.player, world.multiworld)
-    room_1      = Region("Room 1", world.player, world.multiworld)
-    room_2      = Region("Room 2", world.player, world.multiworld)
-    room_3      = Region("Room 3", world.player, world.multiworld)
+    regions = []
 
-    # Let's put all these regions in a list.
-    regions = [lobby, storeroom, dining_room, kitchen, laundry, hallways, room_1, room_2, room_3]
+    for region_name in REGION_LIST:
+        regions.append(Region(region_name, world.player, world.multiworld))    
 
     #   # Some regions may only exist if the player enables certain options.
     #   # In our case, the Hammer locks the top middle chest in its own room if the hammer option is enabled.
@@ -52,16 +46,11 @@ def connect_regions(world: HotelpelagoWorld) -> None:
     # But wait, we no longer have access to the region variables we created in create_all_regions()!
     # Luckily, once you've submitted your regions to multiworld.regions,
     # you can get them at any time using world.get_region(...).
-    lobby       = world.get_region("Lobby")
-    storeroom   = world.get_region("Storeroom")
-    dining_room = world.get_region("Dining Room")
-    kitchen     = world.get_region("Kitchen")
-    laundry     = world.get_region("Laundry")
-    hallways    = world.get_region("Hallways")
-    room_1      = world.get_region("Room 1")
-    room_2      = world.get_region("Room 2")
-    room_3      = world.get_region("Room 3")
 
+    for origin in REGION_CONNECTIONS.keys():
+        r_origin = world.get_region(origin)
+        for target in REGION_CONNECTIONS[origin]:
+            r_origin.connect(world.get_region(target), f"{origin} to {target}")
 
     #   # Okay, now we can get connecting. For this, we need to create Entrances.
     #   # Entrances are inherently one-way, but crucially, AP assumes you can always return to the origin region.
@@ -71,19 +60,6 @@ def connect_regions(world: HotelpelagoWorld) -> None:
 
     #   # You can then connect the Entrance to the target region.
     #   overworld_to_bottom_right_room.connect(bottom_right_room)
-
-    # An even easier way is to use the region.connect helper.
-    lobby.connect(storeroom, "Lobby to Storeroom")
-
-    lobby.connect(dining_room, "Lobby to Dining Room")
-    dining_room.connect(kitchen, "Dining Room to Kitchen")
-
-    lobby.connect(laundry, "Lobby to Laundry")
-    
-    lobby.connect(hallways, "Lobby to Hallways")
-    hallways.connect(room_1, "Hallways to Room 1")
-    hallways.connect(room_2, "Hallways to Room 2")
-    hallways.connect(room_3, "Hallways to Room 3")
 
     #   # The region.connect helper even allows adding a rule immediately.
     #   # We'll talk more about rule creation in the set_all_rules() function in rules.py.

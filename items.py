@@ -10,41 +10,11 @@ if TYPE_CHECKING:
 # Every item must have a unique integer ID associated with it.
 # We will have a lookup from item name to ID here that, in world.py, we will import and bind to the world class.
 # Even if an item doesn't exist on specific options, it must be present in this lookup.
-ITEM_NAME_TO_ID = {
-    "Storeroom Key": 1,
-    "Dining Room Key": 2,
-    "Kitchen Key": 3,
-    "Elevator Pass": 4,
-    "Staircase Pass": 5,
-    "Laundry Key": 6,
-    "Room 1 Key": 7,
-    "Room 2 Key": 8,
-    "Room 3 Key": 9,
-
-    "Mop & Bucket": 10,
-    "Soap": 11,
-
-    "Coin": 12
-}
 
 # Items should have a defined default classification.
 # In our case, we will make a dictionary from item name to classification.
-DEFAULT_ITEM_CLASSIFICATIONS = {
-    "Storeroom Key": ItemClassification.progression,
-    "Dining Room Key": ItemClassification.progression,
-    "Kitchen Key": ItemClassification.progression,
-    "Elevator Pass": ItemClassification.progression,
-    "Staircase Pass": ItemClassification.progression,
-    "Laundry Key": ItemClassification.progression,
-    "Room 1 Key": ItemClassification.progression,
-    "Room 2 Key": ItemClassification.progression,
-    "Room 3 Key": ItemClassification.progression,
-    
-    "Mop & Bucket": ItemClassification.progression,
-    "Soap": ItemClassification.progression,
 
-    "Coin": ItemClassification.filler
-}
+from .data import ITEM_NAME_TO_ID, DEFAULT_ITEM_CLASSIFICATIONS, ITEM_LIST
 
 
 # Each Item instance must correctly report the "game" it belongs to.
@@ -64,7 +34,7 @@ def get_random_filler_item_name(world: HotelpelagoWorld) -> str:
     #       return "Math Trap"
     #   return "Confetti Cannon"
 
-    return "Coin"
+    return "Filler"
 
 
 def create_item_with_correct_classification(world: HotelpelagoWorld, name: str) -> HotelpelagoItem:
@@ -93,19 +63,10 @@ def create_all_items(world: HotelpelagoWorld) -> None:
     # Creating items should generally be done via the world's create_item method.
     # First, we create a list containing all the items that always exist.
 
-    itempool: list[Item] = [
-        world.create_item("Storeroom Key"),
-        world.create_item("Dining Room Key"),
-        world.create_item("Kitchen Key"),
-        world.create_item("Elevator Pass"),
-        world.create_item("Staircase Pass"),
-        world.create_item("Laundry Key"),
-        world.create_item("Room 1 Key"),
-        world.create_item("Room 2 Key"),
-        world.create_item("Room 3 Key"),
-        world.create_item("Mop & Bucket"),
-        world.create_item("Soap"),
-    ]
+    itempool: list[Item] = []
+
+    for item_name in ITEM_LIST:
+        itempool.append(world.create_item(item_name))
 
     #   # Some items may only exist if the player enables certain options.
     #   # In our case, If the hammer option is enabled, the sixth item is the Hammer.

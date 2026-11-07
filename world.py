@@ -8,6 +8,8 @@ from worlds.AutoWorld import World
 from . import items, locations, regions, rules, web_world
 from . import options as hotelpelago_options  # rename due to a name conflict with World.options
 
+from .data import ITEM_GROUPS
+
 # APQuest will go through all the parts of the world api one step at a time,
 # with many examples and comments across multiple files.
 # If you'd rather read one continuous document, or just like reading multiple sources,
@@ -48,6 +50,8 @@ class HotelpelagoWorld(World):
     # There is always one region that the generator starts from & assumes you can always go back to.
     # This defaults to "Menu", but you can change it by overriding origin_region_name.
     origin_region_name = "Lobby"
+
+    item_name_groups = ITEM_GROUPS
 
     # Our world class must have certain functions ("steps") that get called during generation.
     # The main ones are: create_regions, set_rules, create_items.

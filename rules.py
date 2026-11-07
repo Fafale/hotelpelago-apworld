@@ -3,23 +3,13 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from rule_builder.options import OptionFilter
-from rule_builder.rules import Has, HasAll, HasAny, Rule
+from rule_builder.rules import Has, HasAll, HasAny, Rule, CanReachRegion, HasGroupUnique, HasGroup
 
-from .options import HardMode
+from .data import ENTRANCE_RULES, LOCATION_RULES
+from .helpers import CAN_ACCESS_GARDEN, CAN_ACCESS_DINING_ROOM, CAN_ACCESS_KITCHEN, CAN_ACCESS_POOL_AREA, CAN_ACCESS_SAUNA, CAN_ACCESS_STOREROOM, CAN_ACCESS_LAUNDRY, CAN_ACCESS_MECHANICAL_ROOM, CAN_ACCESS_HALLWAYS, CAN_ACCESS_ROOM_A1, CAN_ACCESS_ROOM_B3, CAN_ACCESS_ROOM_C2, CAN_USE_TOOLKIT, CAN_USE_PIPE_WRENCH, CAN_USE_PRUNING_SHEARS, CAN_USE_TOWELS, CAN_USE_SOAP_BAR, CAN_BEAT_CHALLENGE_GARDEN, CAN_BEAT_CHALLENGE_KITCHEN, CAN_BEAT_CHALLENGE_LOBBY, CAN_BEAT_CHALLENGE_POOL_AREA, CAN_BEAT_CHALLENGE_LAUNDRY, CAN_BEAT_CHALLENGE_HALLWAYS, CAN_CLEAN_FLOOR, CAN_CLEAN_STAINS, CAN_CLEAN_TRASH, CAN_COOK_FOOD, CAN_MOVE_PACKAGES, CAN_DELIVER_CLOTHES, CAN_DELIVER_LUGGAGES, CAN_DELIVER_FOOD, CAN_DELIVER_PACKAGES, CAN_DELIVER_DRINKS
 
 if TYPE_CHECKING:
     from .world import HotelpelagoWorld
-
-CAN_ACCESS_STOREROOM = Has("Storeroom Key")
-CAN_ACCESS_DINING_ROOM = Has("Dining Room Key")
-CAN_ACCESS_KITCHEN = CAN_ACCESS_DINING_ROOM & Has("Kitchen Key")
-CAN_ACCESS_LAUNDRY = Has("Laundry Key")
-CAN_ACCESS_HALLWAYS = HasAny("Elevator Pass", "Staircase Pass")
-CAN_ACCESS_ROOM_1 = CAN_ACCESS_HALLWAYS & Has("Room 1 Key")
-CAN_ACCESS_ROOM_2 = CAN_ACCESS_HALLWAYS & Has("Room 2 Key")
-CAN_ACCESS_ROOM_3 = CAN_ACCESS_HALLWAYS & Has("Room 3 Key")
-
-CAN_CLEAN_FLOOR = Has("Mop & Bucket") & CAN_ACCESS_STOREROOM
 
 
 def set_all_rules(world: HotelpelagoWorld) -> None:
@@ -35,23 +25,9 @@ def set_all_rules(world: HotelpelagoWorld) -> None:
 
 def set_all_entrance_rules(world: HotelpelagoWorld) -> None:
     # First, we need to actually grab our entrances. Luckily, there is a helper method for this.
-    lobby_to_storeroom = world.get_entrance("Lobby to Storeroom")
-    lobby_to_dining_room = world.get_entrance("Lobby to Dining Room")
-    dining_room_to_kitchen = world.get_entrance("Dining Room to Kitchen")
-    lobby_to_laundry = world.get_entrance("Lobby to Laundry")
-    lobby_to_hallways = world.get_entrance("Lobby to Hallways")
-    hallways_to_room_1 = world.get_entrance("Hallways to Room 1")
-    hallways_to_room_2 = world.get_entrance("Hallways to Room 2")
-    hallways_to_room_3 = world.get_entrance("Hallways to Room 3")
-
-    world.set_rule(lobby_to_storeroom, CAN_ACCESS_STOREROOM)
-    world.set_rule(lobby_to_dining_room, CAN_ACCESS_DINING_ROOM)
-    world.set_rule(dining_room_to_kitchen, CAN_ACCESS_KITCHEN)
-    world.set_rule(lobby_to_laundry, CAN_ACCESS_LAUNDRY)
-    world.set_rule(lobby_to_hallways, CAN_ACCESS_HALLWAYS)
-    world.set_rule(hallways_to_room_1, CAN_ACCESS_ROOM_1)
-    world.set_rule(hallways_to_room_2, CAN_ACCESS_ROOM_2)
-    world.set_rule(hallways_to_room_3, CAN_ACCESS_ROOM_3)
+    for entrance_name in ENTRANCE_RULES.keys():
+        entrance = world.get_entrance(entrance_name)
+        world.set_rule(entrance, ENTRANCE_RULES[entrance_name])
 
     #   # Now we can set our "can_destroy_bush" rule to the entrance which requires slashing a bush to clear the path.
     #   # The easiest way to do this is by calling world.set_rule, which works for both Locations and Entrances.
@@ -78,49 +54,20 @@ def set_all_entrance_rules(world: HotelpelagoWorld) -> None:
 def set_all_location_rules(world: HotelpelagoWorld) -> None:
     # Removed all comments, need to read again from original apworld
 
-    can_deliver_order: Rule = CAN_ACCESS_KITCHEN
-
-    deliver_order_1 = world.get_location("Dining Room - Deliver order 1")
-    deliver_order_2 = world.get_location("Dining Room - Deliver order 2")
-    deliver_order_3 = world.get_location("Dining Room - Deliver order 3")
-
-    world.set_rule(deliver_order_1, can_deliver_order)
-    world.set_rule(deliver_order_2, can_deliver_order)
-    world.set_rule(deliver_order_3, can_deliver_order)
-
-    clean_floor_lobby = world.get_location("Lobby - Clean the floor")
-    clean_floor_storeroom = world.get_location("Storeroom - Clean the floor")
-    clean_floor_dining_room = world.get_location("Dining Room - Clean the floor")
-    clean_floor_kitchen = world.get_location("Kitchen - Clean the floor")
-    clean_floor_hallways = world.get_location("Hallways - Clean the floor")
-    clean_floor_room_1 = world.get_location("Room 1 - Clean the floor")
-    clean_floor_room_2 = world.get_location("Room 2 - Clean the floor")
-    clean_floor_room_3 = world.get_location("Room 3 - Clean the floor")
-    clean_floor_laundry = world.get_location("Laundry - Clean the floor")
-
-    world.set_rule(clean_floor_lobby, CAN_CLEAN_FLOOR)
-    world.set_rule(clean_floor_storeroom, CAN_CLEAN_FLOOR)
-    world.set_rule(clean_floor_dining_room, CAN_CLEAN_FLOOR)
-    world.set_rule(clean_floor_kitchen, CAN_CLEAN_FLOOR)
-    world.set_rule(clean_floor_hallways, CAN_CLEAN_FLOOR)
-    world.set_rule(clean_floor_room_1, CAN_CLEAN_FLOOR)
-    world.set_rule(clean_floor_room_2, CAN_CLEAN_FLOOR)
-    world.set_rule(clean_floor_room_3, CAN_CLEAN_FLOOR)
-    world.set_rule(clean_floor_laundry, CAN_CLEAN_FLOOR)
+    for location_name in LOCATION_RULES.keys():
+        location = world.get_location(location_name)
+        world.set_rule(location, LOCATION_RULES[location_name])
 
 
 def set_completion_condition(world: HotelpelagoWorld) -> None:
     # For the time being, just have all available to do
     world.set_completion_rule(
-        CAN_ACCESS_STOREROOM &
-        CAN_ACCESS_DINING_ROOM &
-        CAN_ACCESS_KITCHEN &
-        CAN_ACCESS_LAUNDRY &
-        CAN_ACCESS_HALLWAYS &
-        CAN_ACCESS_ROOM_1 &
-        CAN_ACCESS_ROOM_2 &
-        CAN_ACCESS_ROOM_3 &
-        CAN_CLEAN_FLOOR
+        CAN_BEAT_CHALLENGE_GARDEN &
+        CAN_BEAT_CHALLENGE_HALLWAYS &
+        CAN_BEAT_CHALLENGE_KITCHEN &
+        CAN_BEAT_CHALLENGE_LAUNDRY &
+        CAN_BEAT_CHALLENGE_LOBBY &
+        CAN_BEAT_CHALLENGE_POOL_AREA
     )
 
     #   # Finally, we need to set a completion condition for our world, defining what the player needs to win the game.

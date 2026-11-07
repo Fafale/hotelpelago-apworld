@@ -12,39 +12,8 @@ if TYPE_CHECKING:
 # Every location must have a unique integer ID associated with it.
 # We will have a lookup from location name to ID here that, in world.py, we will import and bind to the world class.
 # Even if a location doesn't exist on specific options, it must be present in this lookup.
-LOCATION_NAME_TO_ID = {
-    "Lobby - Check-in Guest 1":         1,
-    "Lobby - Check-in Guest 2":         2,
-    "Lobby - Check-in Guest 3":         3,
-    "Lobby - Clean the floor":          4,
 
-    "Storeroom - Clean the floor":      5,
-
-    "Dining Room - Clear the tables":   6,
-    "Dining Room - Clean the floor":    7,
-    "Dining Room - Take orders":        8,
-    "Dining Room - Deliver order 1":    9,
-    "Dining Room - Deliver order 2":   10,
-    "Dining Room - Deliver order 3":   11,
-
-    "Kitchen - Wash the dishes":       12,
-    "Kitchen - Clean the floor":       13,
-
-    "Hallways - Clean the floor":      14,
-
-    "Room 1 - Tidy the room":          15,
-    "Room 1 - Clean the floor":        16,
-
-    "Room 2 - Tidy the room":          17,
-    "Room 2 - Clean the floor":        18,
-
-    "Room 3 - Tidy the room":          19,
-    "Room 3 - Clean the floor":        20,
-
-    "Laundry - Clean the floor":       21,
-    "Laundry - Wash clothes":          22
-}
-
+from .data import LOCATION_NAME_TO_ID, LOCATION_REGIONS
 
 # Each Location instance must correctly report the "game" it belongs to.
 # To make this simple, it is common practice to subclass the basic Location class and override the "game" field.
@@ -70,15 +39,11 @@ def create_all_locations(world: HotelpelagoWorld) -> None:
 def create_regular_locations(world: HotelpelagoWorld) -> None:
     # Finally, we need to put the Locations ("checks") into their regions.
     # Once again, before we do anything, we can grab our regions we created by using world.get_region()
-    lobby       = world.get_region("Lobby")
-    storeroom   = world.get_region("Storeroom")
-    dining_room = world.get_region("Dining Room")
-    kitchen     = world.get_region("Kitchen")
-    laundry     = world.get_region("Laundry")
-    hallways    = world.get_region("Hallways")
-    room_1      = world.get_region("Room 1")
-    room_2      = world.get_region("Room 2")
-    room_3      = world.get_region("Room 3")
+
+    for region_name in LOCATION_REGIONS.keys():
+        region = world.get_region(region_name)
+        locations_in_region = get_location_names_with_ids(LOCATION_REGIONS[region_name])
+        region.add_locations(locations_in_region, HotelpelagoLocation)
 
     #   # One way to create locations is by just creating them directly via their constructor.
     #   bottom_left_chest = HotelpelagoLocation(
@@ -92,32 +57,6 @@ def create_regular_locations(world: HotelpelagoWorld) -> None:
     # For this, you need to have a dict of location names to their IDs (i.e. a subset of location_name_to_id)
     # Aha! So that's why we made that "get_location_names_with_ids" helper method earlier.
     # You also need to pass your overridden Location class.
-    lobby_locations = get_location_names_with_ids(["Lobby - Check-in Guest 1", "Lobby - Check-in Guest 2", "Lobby - Check-in Guest 3", "Lobby - Clean the floor"])
-    lobby.add_locations(lobby_locations, HotelpelagoLocation)
-
-    storeroom_locations = get_location_names_with_ids(["Storeroom - Clean the floor"])
-    storeroom.add_locations(storeroom_locations, HotelpelagoLocation)
-
-    dining_room_locations = get_location_names_with_ids(["Dining Room - Clear the tables", "Dining Room - Clean the floor", "Dining Room - Take orders", "Dining Room - Deliver order 1", "Dining Room - Deliver order 2", "Dining Room - Deliver order 3"])
-    dining_room.add_locations(dining_room_locations, HotelpelagoLocation)
-
-    kitchen_locations = get_location_names_with_ids(["Kitchen - Wash the dishes", "Kitchen - Clean the floor"])
-    kitchen.add_locations(kitchen_locations, HotelpelagoLocation)
-
-    hallways_locations = get_location_names_with_ids(["Hallways - Clean the floor"])
-    hallways.add_locations(hallways_locations, HotelpelagoLocation)
-
-    room_1_locations = get_location_names_with_ids(["Room 1 - Tidy the room", "Room 1 - Clean the floor"])
-    room_1.add_locations(room_1_locations, HotelpelagoLocation)
-
-    room_2_locations = get_location_names_with_ids(["Room 2 - Tidy the room", "Room 2 - Clean the floor"])
-    room_2.add_locations(room_2_locations, HotelpelagoLocation)
-
-    room_3_locations = get_location_names_with_ids(["Room 3 - Tidy the room", "Room 3 - Clean the floor"])
-    room_3.add_locations(room_3_locations, HotelpelagoLocation)
-
-    laundry_locations = get_location_names_with_ids(["Laundry - Clean the floor", "Laundry - Wash clothes"])
-    laundry.add_locations(laundry_locations, HotelpelagoLocation)
 
     #   # Locations may be in different regions depending on the player's options.
     #   # In our case, the hammer option puts the Top Middle Chest into its own room called Top Middle Room.
