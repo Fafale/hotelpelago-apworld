@@ -1,0 +1,35 @@
+from rule_builder.rules import Has, HasAll, CanReachRegion, HasGroupUnique, HasGroup
+
+CAN_ACCESS_GARDEN = CanReachRegion("Garden")
+CAN_ACCESS_DINING_ROOM = CanReachRegion("Dining Room")
+CAN_ACCESS_KITCHEN = CanReachRegion("Kitchen")
+CAN_ACCESS_POOL_AREA = CanReachRegion("Pool Area")
+CAN_ACCESS_SAUNA = CanReachRegion("Sauna")
+CAN_ACCESS_STOREROOM = CanReachRegion("Storeroom")
+CAN_ACCESS_LAUNDRY = CanReachRegion("Laundry")
+CAN_ACCESS_MECHANICAL_ROOM = CanReachRegion("Mechanical Room")
+CAN_ACCESS_HALLWAYS = CanReachRegion("Hallways")
+CAN_ACCESS_ROOM_A1 = CanReachRegion("Guest Room A1")
+CAN_ACCESS_ROOM_B3 = CanReachRegion("Guest Room B3")
+CAN_ACCESS_ROOM_C2 = CanReachRegion("Guest Room C2")
+CAN_USE_TOOLKIT = Has("Toolkit") & CAN_ACCESS_STOREROOM
+CAN_USE_PIPE_WRENCH = Has("Pipe Wrench") & CAN_ACCESS_MECHANICAL_ROOM
+CAN_USE_PRUNING_SHEARS = Has("Pruning Shears") & CAN_ACCESS_GARDEN
+CAN_USE_TOWELS = Has("Towels") & CAN_ACCESS_SAUNA
+CAN_USE_SOAP_BAR = Has("Soap Bar") & CAN_ACCESS_LAUNDRY
+CAN_BEAT_CHALLENGE_GARDEN = HasAll("Gardening Gloves", "Gardening Boots", "Pruning Shears")
+CAN_BEAT_CHALLENGE_KITCHEN = Has("Food Trolley") & HasGroupUnique("Food Recipes", 4)
+CAN_BEAT_CHALLENGE_LOBBY = HasAll("Storeroom Key", "Forklift")
+CAN_BEAT_CHALLENGE_POOL_AREA = HasAll("Swim Rings", "Wet Floor Sign", "Towels", "Sauna Key")
+CAN_BEAT_CHALLENGE_LAUNDRY = HasAll("Mechanical Room Key", "Soap Bar", "Pipe Wrench", "Laundry Basket")
+CAN_BEAT_CHALLENGE_HALLWAYS = HasAll("Room A1 Key", "Room B3 Key", "Room C2 Key", "Elevator Pass", "Luggage Cart")
+CAN_CLEAN_FLOOR = Has("Mop & Bucket") & CAN_ACCESS_STOREROOM
+CAN_CLEAN_STAINS = CAN_USE_SOAP_BAR & CAN_CLEAN_FLOOR
+CAN_CLEAN_TRASH = Has("Trash Bag") & CAN_ACCESS_STOREROOM & CAN_ACCESS_GARDEN
+CAN_COOK_FOOD = HasGroup("Food Recipes", 1) & CAN_ACCESS_KITCHEN
+CAN_MOVE_PACKAGES = Has("Forklift") & CAN_ACCESS_STOREROOM
+CAN_DELIVER_CLOTHES = Has("Laundry Basket")
+CAN_DELIVER_LUGGAGES = HasAll("Luggage Cart", "Elevator Pass")
+CAN_DELIVER_FOOD = Has("Elevator Pass") & CAN_COOK_FOOD
+CAN_DELIVER_PACKAGES = Has("Elevator Pass") & CAN_MOVE_PACKAGES
+CAN_DELIVER_DRINKS = Has("Drink Tray") & CAN_ACCESS_POOL_AREA
