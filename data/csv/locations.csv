@@ -1,0 +1,78 @@
+1,Lobby,Check-in Guest 1,-
+2,Lobby,Check-in Guest 2,-
+3,Lobby,Check-in Guest 3,-
+4,Lobby,Clean the floor,CAN_CLEAN_FLOOR
+5,Lobby,Receive package 1,CAN_MOVE_PACKAGES
+6,Lobby,Receive package 2,CAN_MOVE_PACKAGES
+7,Lobby,Receive package 3,CAN_MOVE_PACKAGES
+8,Lobby,Prune plants,CAN_USE_PRUNING_SHEARS
+9,Lobby,Final Challenge,CAN_BEAT_CHALLENGE_LOBBY
+10,Garden,Water the plants,"Has(""Water Can"")"
+11,Garden,Fix hose,CAN_USE_PIPE_WRENCH
+12,Garden,Prune plants,"Has(""Pruning Shears"")"
+13,Garden,Remove weeds,"Has(""Gardening Gloves"")"
+14,Garden,Remove weeds on mud,"HasAll(""Gardening Gloves"", ""Gardening Boots"")"
+15,Garden,Retrieve object from mud,"Has(""Gardening Boots"")"
+16,Garden,Final Challenge,CAN_BEAT_CHALLENGE_GARDEN
+17,Dining Room,Clear the tables,-
+18,Dining Room,Clean the floor,CAN_CLEAN_FLOOR
+19,Dining Room,Clean the floor (Tough stains),CAN_CLEAN_STAINS
+20,Dining Room,Deliver food 1,CAN_COOK_FOOD
+21,Dining Room,Deliver food 2,CAN_COOK_FOOD
+22,Dining Room,Deliver food 3,CAN_COOK_FOOD
+23,Kitchen,Wash dishes,CAN_USE_SOAP_BAR
+24,Kitchen,Take out the trash,CAN_CLEAN_TRASH
+25,Kitchen,Fix broken microwave,CAN_USE_TOOLKIT
+26,Kitchen,Final Challenge,CAN_BEAT_CHALLENGE_KITCHEN
+27,Pool Area,Clear the pool,-
+28,Pool Area,Take out the trash,CAN_CLEAN_TRASH
+29,Pool Area,Refill swim rings,"Has(""Swim Rings"")"
+30,Pool Area,Help swimmers,"Has(""Swim Rings"")"
+31,Pool Area,Fix the showers,CAN_USE_PIPE_WRENCH
+32,Pool Area,Serve some drinks,"Has(""Drink Tray"")"
+33,Pool Area,Clean spilled drinks,"Has(""Wet Floor Sign"") & CAN_CLEAN_FLOOR"
+34,Pool Area,Final Challenge,CAN_BEAT_CHALLENGE_POOL_AREA
+35,Sauna,Adjust temperatures,-
+36,Sauna,Refill towels,"Has(""Towels"")"
+37,Sauna,Clean the floor,CAN_CLEAN_FLOOR
+38,Sauna,Fix thermal controller,CAN_USE_TOOLKIT
+39,Sauna,Fix plumbing,CAN_USE_PIPE_WRENCH
+40,Sauna,Wash used towels,"CAN_ACCESS_LAUNDRY & HasAll(""Soap Bar"", ""Towels"")"
+41,Sauna,Relax for a bit,"Has(""Towels"")"
+42,Storeroom,Move small boxes,-
+43,Storeroom,Move big boxes,"Has(""Forklift"")"
+44,Storeroom,Fix wiring,"Has(""Toolkit"")"
+45,Storeroom,Search boxes behind vines,CAN_USE_PRUNING_SHEARS
+46,Storeroom,Search boxes behind pipes,CAN_USE_PIPE_WRENCH
+47,Storeroom,Search boxes behind hungry rat,CAN_COOK_FOOD
+48,Storeroom,Search boxes behind puddle,CAN_USE_TOWELS
+49,Laundry,Clean the floor,CAN_CLEAN_FLOOR
+50,Laundry,Clean the floor (Tough stains),CAN_CLEAN_STAINS
+51,Laundry,Fix broken machine,CAN_USE_TOOLKIT
+52,Laundry,Add soap in machines,"Has(""Soap Bar"")"
+53,Laundry,Prune bonsai,CAN_USE_PRUNING_SHEARS
+54,Laundry,Final Challenge,CAN_BEAT_CHALLENGE_LAUNDRY
+55,Mechanical Room,Press reeeeally important button,-
+56,Mechanical Room,Clean the floor (Tough stains),CAN_CLEAN_STAINS
+57,Mechanical Room,Fix motor wiring,CAN_USE_TOOLKIT
+58,Mechanical Room,Fix plumbing,"Has(""Pipe Wrench"")"
+59,Hallways,Clean the floor,CAN_CLEAN_FLOOR
+60,Hallways,Prune plants,CAN_USE_PRUNING_SHEARS
+61,Hallways,Deliver clothes,CAN_DELIVER_CLOTHES
+62,Hallways,Deliver packages,CAN_DELIVER_PACKAGES
+63,Hallways,Deliver luggages,CAN_DELIVER_LUGGAGES
+64,Hallways,Deliver food,CAN_DELIVER_FOOD
+65,Hallways,Deliver drinks,CAN_DELIVER_DRINKS
+66,Hallways,Final Challenge,CAN_BEAT_CHALLENGE_HALLWAYS
+67,Guest Room A1,Make the bed,-
+68,Guest Room A1,Take out the trash,CAN_CLEAN_TRASH
+69,Guest Room A1,Fix wiring,CAN_USE_TOOLKIT
+70,Guest Room A1,Prune plant,CAN_USE_PRUNING_SHEARS
+71,Guest Room B3,Make the bed,-
+72,Guest Room B3,Take out the trash,CAN_CLEAN_TRASH
+73,Guest Room B3,Refill minibar,CAN_DELIVER_DRINKS
+74,Guest Room B3,Clean the floor (Tough stains),CAN_CLEAN_STAINS
+75,Guest Room C2,Make the bed,-
+76,Guest Room C2,Take out the trash,CAN_CLEAN_TRASH
+77,Guest Room C2,Fix plumbing,CAN_USE_PIPE_WRENCH
+78,Guest Room C2,Clean the floor,CAN_CLEAN_FLOOR

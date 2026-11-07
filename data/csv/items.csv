@@ -1,0 +1,36 @@
+1,Dining Room Key,ItemClassification.progression,1,Map Access
+2,Storeroom Key,ItemClassification.progression,1,Map Access
+3,Laundry Key,ItemClassification.progression,1,Map Access
+4,Elevator Pass,ItemClassification.progression,1,Map Access
+5,Staircase Pass,ItemClassification.progression,1,Map Access
+6,Garden Key,ItemClassification.progression,1,Map Access
+7,Pool Area Key,ItemClassification.progression,1,Map Access
+8,Kitchen Key,ItemClassification.progression,1,Map Access
+9,Sauna Key,ItemClassification.progression,1,Map Access
+10,Mechanical Room Key,ItemClassification.progression,1,Map Access
+11,Room A1 Key,ItemClassification.progression,1,Map Access
+12,Room B3 Key,ItemClassification.progression,1,Map Access
+13,Room C2 Key,ItemClassification.progression,1,Map Access
+14,Food Trolley,ItemClassification.progression,1,Kitchen Items
+15,Water Can,ItemClassification.progression,1,Garden Items
+16,Gardening Gloves,ItemClassification.progression,1,Garden Items
+17,Gardening Boots,ItemClassification.progression,1,Garden Items
+18,Pruning Shears,ItemClassification.progression,1,Garden Items
+19,Recipe 1,ItemClassification.progression,1,Food Recipes
+20,Recipe 2,ItemClassification.progression,1,Food Recipes
+21,Recipe 3,ItemClassification.progression,1,Food Recipes
+22,Recipe 4,ItemClassification.progression,1,Food Recipes
+23,Recipe 5,ItemClassification.progression,1,Food Recipes
+24,Swim Rings,ItemClassification.progression,1,Pool Area Items
+25,Wet Floor Sign,ItemClassification.progression,1,Pool Area Items
+26,Drink Tray,ItemClassification.progression,1,Pool Area Items
+27,Towels,ItemClassification.progression,1,Sauna Items
+28,Mop & Bucket,ItemClassification.progression,1,Storeroom Items
+29,Toolkit,ItemClassification.progression,1,Storeroom Items
+30,Forklift,ItemClassification.progression,1,Storeroom Items
+31,Trash Bag,ItemClassification.progression,1,Storeroom Items
+32,Luggage Cart,ItemClassification.progression,1,Lobby Items
+33,Pipe Wrench,ItemClassification.progression,1,Mechanical Room Items
+34,Laundry Basket,ItemClassification.progression,1,Laundry Items
+35,Soap Bar,ItemClassification.progression,1,Laundry Items
+36,Filler,ItemClassification.filler,0,-
