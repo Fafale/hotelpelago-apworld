@@ -33,4 +33,15 @@
 33,Pipe Wrench,ItemClassification.progression,1,Mechanical Room Items
 34,Laundry Basket,ItemClassification.progression,1,Laundry Items
 35,Soap Bar,ItemClassification.progression,1,Laundry Items
-36,Filler,ItemClassification.filler,0,-
+36,5-Star Review,ItemClassification.progression,0,Token
+37,Slowness Trap,ItemClassification.trap,0,Traps
+38,Lights Out Trap,ItemClassification.trap,0,Traps
+39,Flip Camera Trap,ItemClassification.trap,0,Traps
+40,Zoom Trap,ItemClassification.trap,0,Traps
+41,Invert Controls Trap,ItemClassification.trap,0,Traps
+42,Final Challenge Extra Score,ItemClassification.useful,0,Final Challenge Helpers
+43,Final Challenge Extra Time,ItemClassification.useful,0,Final Challenge Helpers
+44,Final Challenge Extra Life,ItemClassification.useful,0,Final Challenge Helpers
+45,Permanent Move Speed,ItemClassification.filler,0,Filler
+46,Permanent Action Speed,ItemClassification.filler,0,Filler
+47,Nothing,ItemClassification.filler,0,Filler

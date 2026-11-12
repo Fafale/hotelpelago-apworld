@@ -76,3 +76,9 @@
 76,Guest Room C2,Take out the trash,CAN_CLEAN_TRASH
 77,Guest Room C2,Fix plumbing,CAN_USE_PIPE_WRENCH
 78,Guest Room C2,Clean the floor,CAN_CLEAN_FLOOR
+79,Lobby,Final Challenge (Token),CAN_BEAT_CHALLENGE_LOBBY
+80,Garden,Final Challenge (Token),CAN_BEAT_CHALLENGE_GARDEN
+81,Pool Area,Final Challenge (Token),CAN_BEAT_CHALLENGE_POOL_AREA
+82,Kitchen,Final Challenge (Token),CAN_BEAT_CHALLENGE_KITCHEN
+83,Laundry,Final Challenge (Token),CAN_BEAT_CHALLENGE_LAUNDRY
+84,Hallways,Final Challenge (Token),CAN_BEAT_CHALLENGE_HALLWAYS
