@@ -27,14 +27,19 @@ class HotelpelagoItem(Item):
 # To do this, it must define a function called world.get_filler_item_name(), which we will define in world.py later.
 # For now, let's make a function that returns the name of a random filler item here in items.py.
 def get_random_filler_item_name(world: HotelpelagoWorld) -> str:
-    #   # IMPORTANT: Whenever you need to use a random generator, you must use world.random.
-    #   # This ensures that generating with the same generator seed twice yields the same output.
-    #   # DO NOT use a bare random object from Python's built-in random module.
-    #   if world.random.randint(0, 99) < world.options.trap_chance:
-    #       return "Math Trap"
-    #   return "Confetti Cannon"
+    filler_decider = world.random.randint(0, 9)
 
-    return "Filler"
+    if world.random.randint(0, 99) < world.options.useful_filler_percentage:
+        if filler_decider <= 4: return "Permanent Move Speed"
+        else: return "Permanent Action Speed"
+    elif world.random.randint(0, 99) < world.options.trap_percentage:
+        if filler_decider <= 1: return "Slowness Trap"
+        elif filler_decider <= 3: return "Lights Out Trap"
+        elif filler_decider <= 5: return "Flip Camera Trap"
+        elif filler_decider <= 7: return "Zoom Trap"
+        else: return "Invert Controls Trap"
+
+    return "Nothing"
 
 
 def create_item_with_correct_classification(world: HotelpelagoWorld, name: str) -> HotelpelagoItem:
@@ -68,14 +73,12 @@ def create_all_items(world: HotelpelagoWorld) -> None:
     for item_name in ITEM_LIST:
         itempool.append(world.create_item(item_name))
 
-    #   # Some items may only exist if the player enables certain options.
-    #   # In our case, If the hammer option is enabled, the sixth item is the Hammer.
-    #   # Otherwise, we add a filler Confetti Cannon.
-    #   if world.options.hammer:
-    #       # Once again, it is important to stress that even though the Hammer doesn't always exist,
-    #       # it must be present in the worlds item_name_to_id.
-    #       # Whether it is actually in the itempool is determined purely by whether we create and add the item here.
-    #       itempool.append(world.create_item("Hammer"))
+    for i in range(world.options.challenge_helpers):
+        itempool.append(world.create_item("Final Challenge Extra Time"))
+        itempool.append(world.create_item("Final Challenge Extra Score"))
+        itempool.append(world.create_item("Final Challenge Extra Life"))
+
+    
 
     # Archipelago requires that each world submits as many locations as it submits items.
     # This is where we can use our filler and trap items.

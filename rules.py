@@ -58,18 +58,11 @@ def set_all_location_rules(world: HotelpelagoWorld) -> None:
         location = world.get_location(location_name)
         world.set_rule(location, LOCATION_RULES[location_name])
 
+    victory_loc = world.get_location("5-Star Reviews Collected")
+    world.set_rule(victory_loc, Has("5-Star Review", int(world.options.challenges_goal_amount)))
+
 
 def set_completion_condition(world: HotelpelagoWorld) -> None:
-    # For the time being, just have all available to do
-    world.set_completion_rule(
-        CAN_BEAT_CHALLENGE_GARDEN &
-        CAN_BEAT_CHALLENGE_HALLWAYS &
-        CAN_BEAT_CHALLENGE_KITCHEN &
-        CAN_BEAT_CHALLENGE_LAUNDRY &
-        CAN_BEAT_CHALLENGE_LOBBY &
-        CAN_BEAT_CHALLENGE_POOL_AREA
-    )
-
     #   # Finally, we need to set a completion condition for our world, defining what the player needs to win the game.
     #   # For this, we can use world.set_completion_rule.
     #   # You can just set a completion condition directly like any other condition, referencing items the player receives:
@@ -77,7 +70,7 @@ def set_completion_condition(world: HotelpelagoWorld) -> None:
     #
     #   # In our case, we went for the Victory event design pattern (see create_events() in locations.py).
     #   # So lets undo what we just did, and instead set the completion condition to:
-    #   world.set_completion_rule(Has("Victory"))
+    world.set_completion_rule(Has("Victory"))
 
 
 # One final comment about rules:

@@ -45,6 +45,13 @@ def create_regular_locations(world: HotelpelagoWorld) -> None:
         locations_in_region = get_location_names_with_ids(LOCATION_REGIONS[region_name])
         region.add_locations(locations_in_region, HotelpelagoLocation)
 
+
+    # Place relevant items on "Final Challenge (Token)" locations
+    for area in ("Lobby", "Garden", "Pool Area", "Kitchen", "Laundry", "Hallways"):
+        token = items.create_item_with_correct_classification(world, "5-Star Review")
+        loc = world.get_location(f"{area} - Final Challenge (Token)")
+        loc.place_locked_item(token)
+
     #   # One way to create locations is by just creating them directly via their constructor.
     #   bottom_left_chest = HotelpelagoLocation(
     #       world.player, "Bottom Left Chest", world.location_name_to_id["Bottom Left Chest"], overworld
@@ -77,7 +84,10 @@ def create_regular_locations(world: HotelpelagoWorld) -> None:
     #       overworld.add_locations(bottom_left_extra_chest, HotelpelagoLocation)  
 
 def create_events(world: HotelpelagoWorld) -> None:
-    pass
+    lobby_region = world.get_region("Lobby")
+
+    lobby_region.add_event("5-Star Reviews Collected", "Victory", location_type=HotelpelagoLocation, item_type=items.HotelpelagoItem)
+
     #   # Sometimes, the player may perform in-game actions that allow them to progress which are not related to Items.
     #   # In our case, the player must press a button in the top left room to open the final boss door.
     #   # AP has something for this purpose: "Event locations" and "Event items".
